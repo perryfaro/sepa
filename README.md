@@ -1,6 +1,12 @@
 # SEPA Credit Transfer
 
-Example:
+### Installation using Composer
+
+```
+composer require perryfaro/sepa
+```
+
+### Example
 
 ```php
 $creditTransfer = new \Sepa\CreditTransfer();
