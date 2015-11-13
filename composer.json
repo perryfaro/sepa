@@ -1,0 +1,20 @@
+{
+    "name": "perryfaro/sepa",
+    "type": "library",
+    "description": "Creates an XML file for a Single Euro Payments Area (SEPA) Credit Transfer.",
+    "keywords": ["banking", "sepa", "xml"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Perry Faro"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sepa\\": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}
