@@ -1,5 +1,7 @@
 # SEPA Credit Transfer
 
+[![Build Status](https://travis-ci.org/perryfaro/sepa.svg?branch=master)](https://travis-ci.org/perryfaro/sepa)
+
 ### Installation using Composer
 
 ```
