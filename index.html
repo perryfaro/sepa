@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>SEPA PHP by perryfaro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">SEPA PHP</h1>
+      <h2 class="project-tagline">A PHP SEPA library</h2>
+      <a href="https://github.com/perryfaro/sepa" class="btn">View on GitHub</a>
+      <a href="https://github.com/perryfaro/sepa/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/perryfaro/sepa/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="welcome-to-sepa-php" class="anchor" href="#welcome-to-sepa-php" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to SEPA PHP</h1>
+
+<p>SEPA PHP is a php library that helps you read/create SEPA files. For now SEPA PHP only supports the SEPA Credit Transfer, in the near feature we are going to support SEPA Direct Debit and CAMT053</p>
+
+<p>Buildstatus master: <a href="https://travis-ci.org/perryfaro/sepa"><img src="https://travis-ci.org/perryfaro/sepa.svg?branch=master" alt="Build Status"></a></p>
+
+<h3>
+<a id="installation-sepa-using-composer" class="anchor" href="#installation-sepa-using-composer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation SEPA using Composer</h3>
+
+<pre><code>composer require perryfaro/sepa
+</code></pre>
+
+<h3>
+<a id="example-usage-sepa-credit-transfer-sct" class="anchor" href="#example-usage-sepa-credit-transfer-sct" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example usage SEPA Credit Transfer (SCT)</h3>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$creditTransfer</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Sepa\</span><span class="pl-c1">CreditTransfer</span>();</span>
+<span class="pl-s1"><span class="pl-c">//group header</span></span>
+<span class="pl-s1"><span class="pl-smi">$groupHeader</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Sepa\CreditTransfer\</span><span class="pl-c1">GroupHeader</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$groupHeader</span><span class="pl-k">-&gt;</span>setControlSum(<span class="pl-c1">150.00</span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setInitiatingPartyName(<span class="pl-s"><span class="pl-pds">'</span>Company name<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setMessageIdentification(<span class="pl-s"><span class="pl-pds">'</span>lkgjekrthrewkjtherwkjtherwkjtrhewr<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setNumberOfTransactions(<span class="pl-c1">2</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$creditTransfer</span><span class="pl-k">-&gt;</span>setGroupHeader(<span class="pl-smi">$groupHeader</span>);</span>
+<span class="pl-s1"><span class="pl-c">//payment information</span></span>
+<span class="pl-s1"><span class="pl-smi">$paymentInformation</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Sepa\CreditTransfer\</span><span class="pl-c1">PaymentInformation</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$paymentInformation</span></span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setDebtorIBAN(<span class="pl-s"><span class="pl-pds">'</span>NL91ABNA0417164300<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setDebtorName(<span class="pl-s"><span class="pl-pds">'</span>Name<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setPaymentInformationIdentification(<span class="pl-s"><span class="pl-pds">'</span>1281543153223-3463265456<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setRequestedExecutionDate(<span class="pl-s"><span class="pl-pds">'</span>2015-01-01<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">//payment</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Sepa\CreditTransfer\</span><span class="pl-c1">Payment</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span>setAmount(<span class="pl-c1">100.00</span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setCreditorBIC(<span class="pl-s"><span class="pl-pds">'</span>ABNANL2A<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setCreditorIBAN(<span class="pl-s"><span class="pl-pds">'</span>NL91ABNA0417164300<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setCreditorName(<span class="pl-s"><span class="pl-pds">'</span>My Name<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setEndToEndId(<span class="pl-s"><span class="pl-pds">'</span>askfjhwqkjthewqjktewrter<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setRemittanceInformation(<span class="pl-s"><span class="pl-pds">'</span>Transaction testing<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$paymentInformation</span><span class="pl-k">-&gt;</span>addPayments(<span class="pl-smi">$payment</span>);</span>
+<span class="pl-s1"><span class="pl-c">//payment</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Sepa\CreditTransfer\</span><span class="pl-c1">Payment</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span>setAmount(<span class="pl-c1">50.00</span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setCreditorIBAN(<span class="pl-s"><span class="pl-pds">'</span>NL91ABNA0417164300<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setCreditorName(<span class="pl-s"><span class="pl-pds">'</span>My Name 2<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setEndToEndId(<span class="pl-s"><span class="pl-pds">'</span>askfjhwqkjthewqjktewrter<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">        <span class="pl-k">-&gt;</span>setRemittanceInformation(<span class="pl-s"><span class="pl-pds">'</span>Transaction testing 2<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$paymentInformation</span><span class="pl-k">-&gt;</span>addPayments(<span class="pl-smi">$payment</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$creditTransfer</span><span class="pl-k">-&gt;</span>setPaymentInformation(<span class="pl-smi">$paymentInformation</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$xml</span> <span class="pl-k">=</span> <span class="pl-smi">$creditTransfer</span><span class="pl-k">-&gt;</span>xml();</span></pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/perryfaro/sepa">SEPA PHP</a> is maintained by <a href="https://github.com/perryfaro">perryfaro</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
