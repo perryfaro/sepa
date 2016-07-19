@@ -23,7 +23,7 @@ Let's start by creating a new SEPA Credit Transfer object:
 Creating the header
 ------------------------
 
-After that we will create a header. The needs the following data:
+After that we will create a header. This contains the following data:
 
 -  Control sum, this the amount of all your payments
 -  The name that belongs to the IBAN
@@ -50,7 +50,7 @@ Example of header:
 Payment information
 ------------------------
 
-The payment information will contains at the end all payments and the information about who is going to pay.
+The payment information will contains at the end all payments and the information about the payer.
 
 The payment information contains the debtor information:
 
@@ -59,11 +59,9 @@ The payment information contains the debtor information:
 -  Payment Information Identification, this should be always unique
 -  The date the payment should be execute.
 
-
 .. note::
 
     The are dates when there will be no transactions, you have to check this your self. See your bank for these days.
-
 
 Example of the payment information:
 
@@ -86,14 +84,12 @@ Add Payments
 
 Add the payments to the payment information that we want the payout. You can add multiple payments to the payment information.
 
-The payment  starts with the debtor information:
+The payment starts with the debtor information:
 
 -  IBAN creditor
 -  The name that belong to the IBAN
 -  End to end id, this should be unique
 -  Description that will be send with the transaction
-
-
 
 Example of the payment:
 
@@ -118,7 +114,6 @@ Create the SEPA Credit Transfer
 After we have setup a header, payment information and the payment we can create the Sepa Credit Transfer.
 
 You can validate the file based on the XSD by using the validate method.
-
 
 Example creating the file
 
