@@ -69,11 +69,9 @@ class CreditTransfer {
         if ($this->groupHeader === null) {
             throw new Exception;
         }
-
         if ($this->paymentInformation === null) {
             throw new Exception;
         }
-
         $build = new Builder;
         $build->appendGroupHeader($this->groupHeader);
         $build->appendPaymentInformation($this->paymentInformation);

@@ -116,6 +116,10 @@ class CreditTransfer extends Base {
             $creditorAccount->appendChild($id);
             $creditTransferTransactionInformation->appendChild($creditorAccount);
 
+            if($payment->getCtgyPurp() !== false){
+            	$ctgyPurp = $this->createElement('CtgyPurp',$payment->getCtgyPurp());
+				$creditTransferTransactionInformation->appendChild($ctgyPurp);
+			}
             $remittanceInformation = $this->remittence($payment->getRemittanceInformation());
             $creditTransferTransactionInformation->appendChild($remittanceInformation);
             $this->payment->appendChild($creditTransferTransactionInformation);

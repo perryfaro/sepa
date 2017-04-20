@@ -57,7 +57,7 @@ class GroupHeader {
      * @return integer
      */
     public function getControlSum() {
-        return $this->controlSum;
+        return floatval(round($this->controlSum,2));
     }
 
     /**
