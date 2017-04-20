@@ -31,7 +31,7 @@ class PaymentInformation {
     protected $numberOfTransactions = false;
 
     /**
-     * @var integer
+     * @var float
      */
     protected $controlSum = false;
 
@@ -65,7 +65,7 @@ class PaymentInformation {
     protected $payments = array();
 
     /**
-     * @return integer
+     * @return float
      */
     public function getControlSum() {
         return $this->controlSum;
@@ -135,7 +135,7 @@ class PaymentInformation {
     }
 
     /**
-     * @param integer $controlSum
+     * @param float $controlSum
      */
     public function setControlSum($controlSum) {
         $this->controlSum = $controlSum;
@@ -197,7 +197,6 @@ class PaymentInformation {
     public function addPayments($payment) {
         if (is_array($payment)) {
             foreach ($payment as $transfer) {
-
                 $this->payments[] = $transfer;
             }
         } else {

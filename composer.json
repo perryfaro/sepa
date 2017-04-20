@@ -1,12 +1,12 @@
 {
-    "name": "perryfaro/sepa",
+    "name": "aculvi/sepa",
     "type": "library",
     "description": "Creates an XML file for a Single Euro Payments Area (SEPA) Credit Transfer.",
     "keywords": ["banking", "sepa", "xml", "SCT"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Perry Faro"
+            "name": "Alan Culvi"
         }
     ],
     "autoload": {

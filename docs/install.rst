@@ -16,7 +16,7 @@ To install SEPA PHP, simply require it using Composer:
 
 .. code-block:: bash
 
-    composer require perryfaro/sepa
+    composer require aculvi/sepa
 
 Then run Composer:
 

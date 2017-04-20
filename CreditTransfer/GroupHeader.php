@@ -29,7 +29,7 @@ class GroupHeader {
     protected $numberOfTransactions = 0;
 
     /**
-     * @var integer
+     * @var float
      */
     protected $controlSum = 0;
 
@@ -97,7 +97,7 @@ class GroupHeader {
 
     /**
      * 
-     * @param integer $controlSum
+     * @param float $controlSum
      * @return \Sepa\CreditTransfer\GroupHeader
      */
     public function setControlSum($controlSum) {
