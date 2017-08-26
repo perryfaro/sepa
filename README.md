@@ -25,6 +25,7 @@ $paymentInformation = new \Sepa\CreditTransfer\PaymentInformation;
 $paymentInformation
         ->setDebtorIBAN('NL91ABNA0417164300')
         ->setDebtorName('Name')
+		->setNifSuffix('XXXXXXXXXZZZ')
         ->setPaymentInformationIdentification('1281543153223-3463265456')
         ->setRequestedExecutionDate('2015-01-01');
 

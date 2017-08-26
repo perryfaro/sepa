@@ -39,6 +39,11 @@ class GroupHeader {
     protected $initiatingPartyName;
 
     /**
+     * @var string
+     */
+    protected $nifSuffix; // Company ID (mandatory in Spain)
+	
+    /**
      * @var \DateTime
      */
     protected $creationDateTime;
@@ -96,6 +101,13 @@ class GroupHeader {
     }
 
     /**
+     * @return string
+     */
+	public function getNifSuffix() {
+		return $this->nifSuffix;
+	}
+
+    /**
      * 
      * @param float $controlSum
      * @return \Sepa\CreditTransfer\GroupHeader
@@ -145,4 +157,13 @@ class GroupHeader {
         return $this;
     }
 
+    /**
+     * 
+     * @param string $nifSuffix  (Format XXXXXXXXXZZZ  being XXXXXXXXX nif ZZZ suffix)
+     * @return \Sepa\CreditTransfer\GroupHeader
+     */
+	public function setNifSuffix($nifSuffix) {
+        $this->nifSuffix = $nifSuffix;
+        return $this;
+	}
 }

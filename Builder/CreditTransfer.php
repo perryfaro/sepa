@@ -42,7 +42,20 @@ class CreditTransfer extends Base {
 
         $initiatingParty = $this->createElement('InitgPty');
         $initiatingPartyName = $this->createElement('Nm', $groupHeader->getInitiatingPartyName());
-        $initiatingParty->appendChild($initiatingPartyName);
+
+		if($groupHeader->getNifSuffix()!=""){
+			$id_ = $this->createElement('Id');
+			$orgId = $this->createElement('OrgId');
+			$othr = $this->createElement('Othr');
+			$id_2 = $this->createElement('Id',$groupHeader->getNifSuffix());
+		
+			$othr->appendChild($id_2);
+			$orgId->appendChild($othr);
+			$id_->appendChild($orgId);
+			$initiatingParty->appendChild($id_);
+		}
+        
+		$initiatingParty->appendChild($initiatingPartyName);
         $groupHeaderElement->appendChild($initiatingParty);
 
         $this->transfer->appendChild($groupHeaderElement);
