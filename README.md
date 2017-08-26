@@ -44,6 +44,8 @@ $payment->setAmount(50.00)
         ->setCreditorIBAN('NL91ABNA0417164300')
         ->setCreditorName('My Name 2')
         ->setEndToEndId('askfjhwqkjthewqjktewrter')
+		->setCreditorCountry('ES')
+		->setCreditorAddress('Street name Num X')
         ->setRemittanceInformation('Transaction testing 2');
 
 $paymentInformation->addPayments($payment);
