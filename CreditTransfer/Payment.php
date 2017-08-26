@@ -23,6 +23,19 @@ class Payment {
      */
     protected $creditorName;
 
+
+    /**
+     *
+     * @var string 
+     */
+    protected $creditorCountry;
+
+    /**
+     *
+     * @var string 
+     */
+    protected $creditorAddress;
+
     /**
      *
      * @var string 
@@ -74,6 +87,23 @@ class Payment {
     public function getCreditorName() {
         return $this->creditorName;
     }
+
+
+    /**
+     * 
+     * @return string
+     */
+	public function getCreditorCountry() {
+        return $this->creditorCountry;
+	}
+
+    /**
+     * 
+     * @return string
+     */
+	public function getCreditorAddress() {
+        return $this->creditorAddress;
+	}
 
     /**
      * 
@@ -137,6 +167,26 @@ class Payment {
         return $this;
     }
 
+    /**
+     * 
+     * @param string $name
+     * @return \Sepa\CreditTransfer\Payment
+     */
+	public function setCreditorCountry($country) {
+        $this->creditorCountry = $country;
+        return $this;
+	}
+
+    /**
+     * 
+     * @param string $name
+     * @return \Sepa\CreditTransfer\Payment
+     */
+	public function setCreditorAddress($address) {
+        $this->creditorAddress = $address;
+        return $this;
+	}
+	
     /**
      * 
      * @param string $IBAN

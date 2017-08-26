@@ -100,7 +100,7 @@ class CreditTransfer extends Base {
             $amount->appendChild($instructedAmount);
             $creditTransferTransactionInformation->appendChild($amount);
 
-		if($payment->getCtgyPurp() != false){
+			if($payment->getCtgyPurp() != false){
 				$category = $this->createElement('CtgyPurp');
 				$categoryValue = $this->createElement('Cd', $payment->getCtgyPurp());
 				$category->appendChild($categoryValue);
@@ -114,6 +114,17 @@ class CreditTransfer extends Base {
 
             $creditor = $this->createElement('Cdtr');
             $creditor->appendChild($this->createElement('Nm', $payment->getCreditorName()));
+
+			if($payment->getCreditorCountry() != '' || $payment->getCreditorAddress() != ''){
+				$postalAddress = $creditor->appendChild($this->createElement('PstlAdr'));
+				if($payment->getCreditorCountry() != ''){
+		            $postalAddress->appendChild($this->createElement('Ctry', $payment->getCreditorCountry()));
+				}
+				if($payment->getCreditorAddress() != ''){
+		            $postalAddress->appendChild($this->createElement('AdrLine', $payment->getCreditorAddress()));
+				}
+			}
+
             $creditTransferTransactionInformation->appendChild($creditor);
 
             $creditorAccount = $this->createElement('CdtrAcct');

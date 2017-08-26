@@ -37,6 +37,8 @@ class CreditTransfer extends \PHPUnit_Framework_TestCase {
         $payment->setAmount(50.00)
                 ->setCreditorIBAN('NL91ABNA0417164300')
                 ->setCreditorName('My Name 2')
+				->setCreditorCountry('ES')
+				->setCreditorAddress('Street name Num X')
                 ->setEndToEndId('askfjhwqkjthewqjktewrter')
                 ->setRemittanceInformation('Transaction testing 2');
 
