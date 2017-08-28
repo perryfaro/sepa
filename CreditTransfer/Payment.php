@@ -40,6 +40,12 @@ class Payment {
      *
      * @var string 
      */
+    protected $creditorAddress2;
+
+    /**
+     *
+     * @var string 
+     */
     protected $creditorIBAN;
 
     /**
@@ -103,6 +109,14 @@ class Payment {
      */
 	public function getCreditorAddress() {
         return $this->creditorAddress;
+	}
+
+    /**
+     * 
+     * @return string
+     */
+	public function getCreditorAddress2() {
+        return $this->creditorAddress2;
 	}
 
     /**
@@ -186,6 +200,17 @@ class Payment {
         $this->creditorAddress = $address;
         return $this;
 	}
+
+    /**
+     * 
+     * @param string $name
+     * @return \Sepa\CreditTransfer\Payment
+     */
+	public function setCreditorAddress2($address2) {
+        $this->creditorAddress2 = $address2;
+        return $this;
+	}
+	
 	
     /**
      * 

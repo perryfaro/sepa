@@ -42,7 +42,8 @@ class CreditTransfer extends Base {
 
         $initiatingParty = $this->createElement('InitgPty');
         $initiatingPartyName = $this->createElement('Nm', $groupHeader->getInitiatingPartyName());
-
+		$initiatingParty->appendChild($initiatingPartyName);
+		
 		if($groupHeader->getNifSuffix()!=""){
 			$id_ = $this->createElement('Id');
 			$orgId = $this->createElement('OrgId');
@@ -54,8 +55,6 @@ class CreditTransfer extends Base {
 			$id_->appendChild($orgId);
 			$initiatingParty->appendChild($id_);
 		}
-        
-		$initiatingParty->appendChild($initiatingPartyName);
         $groupHeaderElement->appendChild($initiatingParty);
 
         $this->transfer->appendChild($groupHeaderElement);
@@ -128,13 +127,18 @@ class CreditTransfer extends Base {
             $creditor = $this->createElement('Cdtr');
             $creditor->appendChild($this->createElement('Nm', $payment->getCreditorName()));
 
-			if($payment->getCreditorCountry() != '' || $payment->getCreditorAddress() != ''){
+			if($payment->getCreditorCountry() != '' || 
+			   $payment->getCreditorAddress() != '' ||
+			   $payment->getCreditorAddress2()!= '' ){
 				$postalAddress = $creditor->appendChild($this->createElement('PstlAdr'));
 				if($payment->getCreditorCountry() != ''){
 		            $postalAddress->appendChild($this->createElement('Ctry', $payment->getCreditorCountry()));
 				}
 				if($payment->getCreditorAddress() != ''){
 		            $postalAddress->appendChild($this->createElement('AdrLine', $payment->getCreditorAddress()));
+				}
+				if($payment->getCreditorAddress2() != ''){
+		            $postalAddress->appendChild($this->createElement('AdrLine', $payment->getCreditorAddress2()));
 				}
 			}
 
