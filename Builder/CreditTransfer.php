@@ -60,7 +60,7 @@ class CreditTransfer extends Base {
         $this->transfer->appendChild($groupHeaderElement);
     }
 
-    public function appendPaymentInformation(PaymentInformation $paymentInformation) {
+    public function appendPaymentInformation(PaymentInformation $paymentInformation,GroupHeader $groupHeader) {
         $this->payment = $this->createElement('PmtInf');
 
         $paymentInformationIdentification = $this->createElement('PmtInfId', $paymentInformation->getPaymentInformationIdentification());
@@ -85,6 +85,20 @@ class CreditTransfer extends Base {
         $debtor->appendChild($this->createElement('Nm', $paymentInformation->getDebtorName()));
         $this->payment->appendChild($debtor);
 
+		if($groupHeader->getNifSuffix()!=""){
+			// some banks also needs company id inside PmtInf (Payment Information)
+			
+			$id_ = $this->createElement('Id');
+			$orgId = $this->createElement('OrgId');
+			$othr = $this->createElement('Othr');
+			$id_2 = $this->createElement('Id',$groupHeader->getNifSuffix());
+		
+			$othr->appendChild($id_2);
+			$orgId->appendChild($othr);
+			$id_->appendChild($orgId);
+			$debtor->appendChild($id_);
+		}
+		
         $debtorAgentAccount = $this->createElement('DbtrAcct');
         $debtorAgentAccount->appendChild($this->IBAN($paymentInformation->getDebtorIBAN()));
         $this->payment->appendChild($debtorAgentAccount);

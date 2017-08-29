@@ -74,7 +74,7 @@ class CreditTransfer {
         }
         $build = new Builder;
         $build->appendGroupHeader($this->groupHeader);
-        $build->appendPaymentInformation($this->paymentInformation);
+        $build->appendPaymentInformation($this->paymentInformation,$this->groupHeader);
         return $build->xml();
     }
 
