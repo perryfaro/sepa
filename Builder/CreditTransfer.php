@@ -105,6 +105,26 @@ class CreditTransfer extends Base {
             $paymentIdentification = $this->createElement('PmtId');
             $paymentIdentification->appendChild($this->createElement('EndToEndId', $payment->getEndToEndId()));
             $creditTransferTransactionInformation->appendChild($paymentIdentification);
+			
+			if($payment->getCtgyPurp() != false || $payment->getIsSepa() ){
+				$paymentTypeInformation = $this->createElement("PmtTpInf");
+
+				if($payment->getIsSepa()){
+					$serviceLevel = $this->createElement('SvcLvl');
+					$serviceLevelCode = $this->createElement('Cd', "SEPA");
+					$serviceLevel->appendChild($serviceLevelCode);
+					$paymentTypeInformation->appendChild($serviceLevel);
+				}	
+
+				if($payment->getCtgyPurp() != false){
+					$category = $this->createElement('CtgyPurp');
+					$categoryValue = $this->createElement('Cd', $payment->getCtgyPurp());
+					$category->appendChild($categoryValue);
+					$paymentTypeInformation->appendChild($category);
+				}	
+
+				$creditTransferTransactionInformation->appendChild($paymentTypeInformation);
+			}
 
             $amount = $this->createElement('Amt');
             $instructedAmount = $this->createElement('InstdAmt', $payment->getAmount());
@@ -112,12 +132,6 @@ class CreditTransfer extends Base {
             $amount->appendChild($instructedAmount);
             $creditTransferTransactionInformation->appendChild($amount);
 
-			if($payment->getCtgyPurp() != false){
-				$category = $this->createElement('CtgyPurp');
-				$categoryValue = $this->createElement('Cd', $payment->getCtgyPurp());
-				$category->appendChild($categoryValue);
-				$creditTransferTransactionInformation->appendChild($category);
-			}
             $creditorAgent = $this->createElement('CdtrAgt');
             $financialInstitution = $this->createElement('FinInstnId');
             $financialInstitution->appendChild($this->createElement('BIC', $payment->getCreditorBIC()));
