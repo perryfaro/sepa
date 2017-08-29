@@ -25,7 +25,7 @@ $paymentInformation = new \Sepa\CreditTransfer\PaymentInformation;
 $paymentInformation
         ->setDebtorIBAN('NL91ABNA0417164300')
         ->setDebtorName('Name')
-		->setNifSuffix('XXXXXXXXXZZZ')
+        ->setNifSuffix('XXXXXXXXXZZZ')
         ->setPaymentInformationIdentification('1281543153223-3463265456')
         ->setRequestedExecutionDate('2015-01-01');
 
@@ -36,6 +36,7 @@ $payment->setAmount(100.00)
         ->setCreditorIBAN('NL91ABNA0417164300')
         ->setCreditorName('My Name')
         ->setEndToEndId('askfjhwqkjthewqjktewrter')
+        ->setCtgyPurp('SUPP')
         ->setRemittanceInformation('Transaction testing');
 
 $paymentInformation->addPayments($payment);
@@ -45,8 +46,10 @@ $payment->setAmount(50.00)
         ->setCreditorIBAN('NL91ABNA0417164300')
         ->setCreditorName('My Name 2')
         ->setEndToEndId('askfjhwqkjthewqjktewrter')
-		->setCreditorCountry('ES')
-		->setCreditorAddress('Street name Num X')
+        ->setCreditorCountry('ES')
+        ->setCreditorAddress('Street name Num X')
+        ->setIsSepa(false)
+        ->setCtgyPurp('SALA')
         ->setRemittanceInformation('Transaction testing 2');
 
 $paymentInformation->addPayments($payment);
