@@ -102,7 +102,15 @@ class CreditTransfer extends Base {
 
             $creditorAgent = $this->createElement('CdtrAgt');
             $financialInstitution = $this->createElement('FinInstnId');
-            $financialInstitution->appendChild($this->createElement('BIC', $payment->getCreditorBIC()));
+            
+            if ($payment->getCreditorBIC() === 'NOTPROVIDED') {
+                $financialInstitutionOther = $this->createElement('Othr');
+                $financialInstitutionOther->appendChild($this->createElement('Id', $payment->getCreditorBIC()));
+                $financialInstitution->appendChild($financialInstitutionOther);
+            } else {
+                $financialInstitution->appendChild($this->createElement('BIC', $payment->getCreditorBIC()));
+            }
+            
             $creditorAgent->appendChild($financialInstitution);
             $creditTransferTransactionInformation->appendChild($creditorAgent);
 
