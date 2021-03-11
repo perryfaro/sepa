@@ -2,7 +2,7 @@
 
 date_default_timezone_set('Europe/Amsterdam');
 
-class CreditTransfer extends \PHPUnit_Framework_TestCase {
+class CreditTransfer extends \PHPUnit\Framework\TestCase {
 
     public function testCreateTransfer() {
         $creditTransfer = new \Sepa\CreditTransfer();
