@@ -62,10 +62,10 @@ class CreditTransfer {
     }
 
     /**
-     * 
+     * @param string $painformat
      * @throws Exception
      */
-    public function xml() {
+    public function xml($painformat = 'pain.001.001.03') {
         if ($this->groupHeader === null) {
             throw new Exception;
         }
@@ -74,7 +74,7 @@ class CreditTransfer {
             throw new Exception;
         }
 
-        $build = new Builder;
+        $build = new Builder($painformat);
         $build->appendGroupHeader($this->groupHeader);
         $build->appendPaymentInformation($this->paymentInformation);
         return $build->xml();
