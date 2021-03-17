@@ -1,23 +1,28 @@
 {
-    "name": "perryfaro/sepa",
+    "name": "silentgecko/sepa",
     "type": "library",
     "description": "Creates an XML file for a Single Euro Payments Area (SEPA) Credit Transfer.",
-    "keywords": ["banking", "sepa", "xml", "SCT"],
+    "keywords": ["banking", "sepa", "xml", "SCT", "php", "php7"],
     "license": "MIT",
     "authors": [
+        {
+            "name": "René Welbers",
+            "email": "info@wereco.de"
+        },
         {
             "name": "Perry Faro"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Sepa\\": ""
+            "silentgecko\\Sepa\\": ["src/", "tests/"]
         }
     },
     "require": {
-        "php": ">=5.4"
+        "php": ">=7.4",
+        "ext-dom": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "7.*"
+        "phpunit/phpunit": "9.*"
     }
 }

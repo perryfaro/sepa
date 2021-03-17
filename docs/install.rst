@@ -10,16 +10,10 @@ website for more information.
 
 .. note::
 
-    SEPA PHP requires at least PHP 5.3.3 (or later).
+    SEPA PHP requires at least PHP 7.4 (or later).
 
 To install SEPA PHP, simply require it using Composer:
 
 .. code-block:: bash
 
-    composer require perryfaro/sepa
-
-Then run Composer:
-
-.. code-block:: bash
-
-    composer install --no-dev
+    composer require silentgecko/sepa
