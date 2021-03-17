@@ -17,7 +17,6 @@ class Base {
      * @param string $painFormat
      */
     public function __construct($painFormat) {
-        
         if (in_array($painFormat, ['pain.001.001.03', 'pain.001.003.03'])) {
             $this->painFormat = $painFormat;
         } else {
@@ -84,5 +83,4 @@ class Base {
     {
         return $this->painFormat;
     }
-
 }

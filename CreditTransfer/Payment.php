@@ -141,7 +141,9 @@ class Payment {
      * @return \Sepa\CreditTransfer\Payment
      */
     public function setCreditorBIC($BIC) {
-        $this->creditorBIC = $BIC;
+        if ($BIC !== null && $BIC !== '') {
+            $this->creditorBIC = $BIC;
+        }
         return $this;
     }
     
