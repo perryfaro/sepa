@@ -1,6 +1,6 @@
 # SEPA Credit Transfer
 
-[![Build Status](https://travis-ci.org/silentgecko/sepa.svg?branch=master)](https://travis-ci.org/silentgecko/sepa)
+[![Build Status](https://travis-ci.com/silentgecko/sepa.svg?branch=master)](https://travis-ci.com/silentgecko/sepa)
 
 ### Installation using Composer
 
