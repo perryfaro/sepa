@@ -10,12 +10,20 @@
 namespace Sepa\Builder;
 
 class Base {
+    private $painFormat = 'pain.001.001.03';
 
     /**
      * 
      * @param string $painFormat
      */
     public function __construct($painFormat) {
+        
+        if (in_array($painFormat, ['pain.001.001.03', 'pain.001.003.03'])) {
+            $this->painFormat = $painFormat;
+        } else {
+            throw new \Exception('Invalid painformat provided');
+        }
+        
         $this->dom = new \DOMDocument('1.0', 'UTF-8');
         $this->dom->formatOutput = true;
         $this->root = $this->dom->createElement('Document');
@@ -67,6 +75,14 @@ class Base {
         $remittanceInformation = $this->createElement('RmtInf');
         $remittanceInformation->appendChild($this->createElement('Ustrd', $remittenceInformation));
         return $remittanceInformation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPainFormat()
+    {
+        return $this->painFormat;
     }
 
 }
