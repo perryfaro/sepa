@@ -1,31 +1,35 @@
 <?php
-
 /**
- * CreditTransfer
- *
  * @author Perry Faro 2015
+ * @author René Welbers 2021 <info@wereco.de>
  * @license MIT
  */
 
-namespace Sepa\Builder;
+namespace silentgecko\Sepa\Builder;
 
-use Sepa\Builder\Base;
-use Sepa\CreditTransfer\GroupHeader;
-use Sepa\CreditTransfer\PaymentInformation;
+use DOMElement;
+use silentgecko\Sepa\CreditTransfer\GroupHeader;
+use silentgecko\Sepa\CreditTransfer\PaymentInformation;
 
-class CreditTransfer extends Base {
+/**
+ * Class CreditTransfer
+ *
+ * @package silentgecko\Sepa\Builder
+ */
+class CreditTransfer extends Base
+{
+    protected DOMElement $transfer;
+    protected DOMElement $payment;
 
-    public function __construct($painFormat = 'pain.001.001.03') {
+    public function __construct($painFormat = 'pain.001.001.03')
+    {
         parent::__construct($painFormat);
         $this->transfer = $this->createElement('CstmrCdtTrfInitn');
         $this->root->appendChild($this->transfer);
     }
 
-    /**
-     * 
-     * @param GroupHeader $groupHeader
-     */
-    public function appendGroupHeader(GroupHeader $groupHeader) {
+    public function appendGroupHeader(GroupHeader $groupHeader) :void
+    {
         $groupHeaderElement = $this->createElement('GrpHdr');
 
         $messageIdentification = $this->createElement('MsgId', $groupHeader->getMessageIdentification());
@@ -48,7 +52,8 @@ class CreditTransfer extends Base {
         $this->transfer->appendChild($groupHeaderElement);
     }
 
-    public function appendPaymentInformation(PaymentInformation $paymentInformation) {
+    public function appendPaymentInformation(PaymentInformation $paymentInformation) :void
+    {
         $this->payment = $this->createElement('PmtInf');
 
         $paymentInformationIdentification = $this->createElement('PmtInfId', $paymentInformation->getPaymentInformationIdentification());
@@ -57,11 +62,11 @@ class CreditTransfer extends Base {
         $paymentMethod = $this->createElement('PmtMtd', $paymentInformation->getPaymentMethod());
         $this->payment->appendChild($paymentMethod);
 
-        if ($paymentInformation->getNumberOfTransactions() !== false) {
+        if ($paymentInformation->getNumberOfTransactions() > 0) {
             $numberOfTransactions = $this->createElement('NbOfTxs', $paymentInformation->getNumberOfTransactions());
             $this->payment->appendChild($numberOfTransactions);
         }
-        if ($paymentInformation->getControlSum() !== false) {
+        if ($paymentInformation->getControlSum() > 0) {
             $controlSum = $this->createElement('CtrlSum', $paymentInformation->getControlSum());
             $this->payment->appendChild($controlSum);
         }
@@ -76,7 +81,7 @@ class CreditTransfer extends Base {
         $debtorAgentAccount = $this->createElement('DbtrAcct');
         $debtorAgentAccount->appendChild($this->IBAN($paymentInformation->getDebtorIBAN()));
         $this->payment->appendChild($debtorAgentAccount);
-        
+
         $debtorAgent = $this->createElement('DbtrAgt');
         $debtorAgent->appendChild($this->financialInstitution($paymentInformation->getDebtorBIC()));
         $this->payment->appendChild($debtorAgent);
@@ -86,7 +91,8 @@ class CreditTransfer extends Base {
         $this->transfer->appendChild($this->payment);
     }
 
-    protected function appendPayments($payments) {
+    protected function appendPayments($payments) :void
+    {
         foreach ($payments as $payment) {
             $creditTransferTransactionInformation = $this->createElement('CdtTrfTxInf');
 
@@ -102,7 +108,7 @@ class CreditTransfer extends Base {
 
             $creditorAgent = $this->createElement('CdtrAgt');
             $financialInstitution = $this->createElement('FinInstnId');
-            
+
             if ($payment->getCreditorBIC() === 'NOTPROVIDED' && $this->getPainFormat() === 'pain.001.001.03') {
                 $financialInstitutionOther = $this->createElement('Othr');
                 $financialInstitutionOther->appendChild($this->createElement('Id', $payment->getCreditorBIC()));
@@ -110,7 +116,7 @@ class CreditTransfer extends Base {
             } else {
                 $financialInstitution->appendChild($this->createElement('BIC', $payment->getCreditorBIC()));
             }
-            
+
             $creditorAgent->appendChild($financialInstitution);
             $creditTransferTransactionInformation->appendChild($creditorAgent);
 
@@ -130,13 +136,13 @@ class CreditTransfer extends Base {
         }
     }
 
-    /**
-     * Return xml
-     * 
-     * @return string
-     */
-    public function xml() {
-        return (string) $this->dom->saveXML();
+    public function xml() :string
+    {
+        $xml = $this->dom->saveXML();
+        if ($xml === false) {
+            throw new SepaSctException('saving of XML failed.');
+        }
+        return $xml;
     }
 
 }

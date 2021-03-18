@@ -1,13 +1,6 @@
 .. index::
    single: SEPA Credit Transfer (SCT)
 
-Creating a SEPA Credit Transfer file
-==================
-
-Phinx relies on migrations in order to transform your database. Each migration
-is represented by a PHP class in a unique file. It is preferred that you write
-your migrations using the Phinx PHP API, but raw SQL is also supported.
-
 Starting a new Sepa Credit Transfer
 ------------------------
 
@@ -17,7 +10,7 @@ Let's start by creating a new SEPA Credit Transfer object:
 
         <?php
 
-        $creditTransfer = new \Sepa\CreditTransfer(); 
+        $creditTransfer = new \silentgecko\Sepa\CreditTransfer();
 
 
 Creating the header
@@ -38,7 +31,7 @@ Example of header:
         <?php
 
         //group header
-        $groupHeader = new \Sepa\CreditTransfer\GroupHeader();
+        $groupHeader = new \silentgecko\Sepa\CreditTransfer\GroupHeader();
         $groupHeader->setControlSum(150.00)
            ->setInitiatingPartyName('Company name')
            ->setMessageIdentification('lkgjekrthrewkjtherwkjtherwkjtrhewr')
@@ -70,7 +63,7 @@ Example of the payment information:
         <?php
 
         //create payment information
-        $paymentInformation = new \Sepa\CreditTransfer\PaymentInformation;
+        $paymentInformation = new \silentgecko\Sepa\CreditTransfer\PaymentInformation;
 
         $paymentInformation
            ->setDebtorIBAN('NL91ABNA0417164300')
@@ -98,7 +91,7 @@ Example of the payment:
         <?php
 
         //payment
-        $payment = new \Sepa\CreditTransfer\Payment;
+        $payment = new \silentgecko\Sepa\CreditTransfer\Payment;
         $payment->setAmount(50.00)
            ->setCreditorIBAN('NL91ABNA0417164300')
            ->setCreditorName('My Name 2')

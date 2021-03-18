@@ -1,26 +1,26 @@
 # SEPA Credit Transfer
 
-[![Build Status](https://travis-ci.org/perryfaro/sepa.svg?branch=master)](https://travis-ci.org/perryfaro/sepa)
+[![Build Status](https://travis-ci.com/silentgecko/sepa.svg?branch=master)](https://travis-ci.com/silentgecko/sepa)
 
 ### Installation using Composer
 
 ```
-composer require perryfaro/sepa
+composer require silentgecko/sepa
 ```
 
 ### Example
 
 ```php
-$creditTransfer = new \Sepa\CreditTransfer();
+$creditTransfer = new \silentgecko\Sepa\CreditTransfer();
 //group header
-$groupHeader = new \Sepa\CreditTransfer\GroupHeader();
+$groupHeader = new \silentgecko\Sepa\CreditTransfer\GroupHeader();
 $groupHeader->setControlSum(150.00)
         ->setInitiatingPartyName('Company name')
         ->setMessageIdentification('lkgjekrthrewkjtherwkjtherwkjtrhewr')
         ->setNumberOfTransactions(2);
 $creditTransfer->setGroupHeader($groupHeader);
 //payment information
-$paymentInformation = new \Sepa\CreditTransfer\PaymentInformation;
+$paymentInformation = new \silentgecko\Sepa\CreditTransfer\PaymentInformation;
 
 $paymentInformation
         ->setDebtorIBAN('NL91ABNA0417164300')
@@ -29,7 +29,7 @@ $paymentInformation
         ->setRequestedExecutionDate('2015-01-01');
 
 //payment
-$payment = new \Sepa\CreditTransfer\Payment;
+$payment = new \silentgecko\Sepa\CreditTransfer\Payment;
 $payment->setAmount(100.00)
         ->setCreditorBIC('ABNANL2A')
         ->setCreditorIBAN('NL91ABNA0417164300')
@@ -39,7 +39,7 @@ $payment->setAmount(100.00)
 
 $paymentInformation->addPayments($payment);
 //payment
-$payment = new \Sepa\CreditTransfer\Payment;
+$payment = new \silentgecko\Sepa\CreditTransfer\Payment;
 $payment->setAmount(50.00)
         ->setCreditorIBAN('NL91ABNA0417164300')
         ->setCreditorName('My Name 2')
@@ -49,5 +49,10 @@ $payment->setAmount(50.00)
 $paymentInformation->addPayments($payment);
 
 $creditTransfer->setPaymentInformation($paymentInformation);
-$xml = $creditTransfer->xml();
+
+// default is pain.001.001.03.xsd schema format, but you can also use the newer pain.001.003.03.xsd
+$painformat = 'pain.001.001.03.xsd'; 
+$xml = $creditTransfer->xml($painformat);
+//validation
+$creditTransfer->validate($xml, $painformat);
 ```
