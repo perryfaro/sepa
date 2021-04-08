@@ -21,7 +21,7 @@ class PaymentInformation
 
     protected int $numberOfTransactions = 0;
 
-    protected int $controlSum = 0;
+    protected float $controlSum = 0;
 
     protected string $requestedExecutionDate;
 
@@ -33,7 +33,7 @@ class PaymentInformation
 
     protected array $payments = [];
 
-    public function getControlSum() :int
+    public function getControlSum() :float
     {
         return $this->controlSum;
     }
@@ -78,7 +78,7 @@ class PaymentInformation
         return $this->requestedExecutionDate;
     }
 
-    public function setControlSum(int $controlSum) :self
+    public function setControlSum(float $controlSum) :self
     {
         $this->controlSum = $controlSum;
         return $this;

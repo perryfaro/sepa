@@ -38,7 +38,7 @@ class CreditTransferTest extends TestCase
         $creditTransfer = new CreditTransfer();
         //group header
         $groupHeader = new GroupHeader();
-        $groupHeader->setControlSum(150.00)
+        $groupHeader->setControlSum(150.23)
             ->setInitiatingPartyName('Company name')
             ->setMessageIdentification('lkgjekrthrewkjtherwkjtherwkjtrhewr')
             ->setNumberOfTransactions(2)
@@ -53,12 +53,12 @@ class CreditTransferTest extends TestCase
             ->setDebtorBIC('')
             ->setPaymentInformationIdentification('1281543153223-3463265456')
             ->setRequestedExecutionDate('2015-01-01')
-            ->setControlSum(150)
+            ->setControlSum(150.23)
             ->setNumberOfTransactions(2);
 
         //payment
         $payment = new Payment();
-        $payment->setAmount(100.00)
+        $payment->setAmount(100.11)
             ->setCreditorBIC('ABNANL2A')
             ->setCreditorBIC('NOTPROVIDED')
             ->setCreditorIBAN('NL91ABNA0417164300')
@@ -70,7 +70,7 @@ class CreditTransferTest extends TestCase
         $paymentInformation->addPayments($payment);
         //payment
         $payment = new Payment();
-        $payment->setAmount(50.00)
+        $payment->setAmount(50.22)
             ->setCreditorIBAN('NL91ABNA0417164300')
             ->setCreditorName('My Name 2')
             ->setCreditorBIC('')

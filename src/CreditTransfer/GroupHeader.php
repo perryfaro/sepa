@@ -22,7 +22,7 @@ class GroupHeader
 
     protected int $numberOfTransactions = 0;
 
-    protected int $controlSum = 0;
+    protected float $controlSum = 0;
 
     protected string $initiatingPartyName;
 
@@ -39,7 +39,7 @@ class GroupHeader
         $this->creationDateTime = new DateTime();
     }
 
-    public function getControlSum() :int
+    public function getControlSum() :float
     {
         return $this->controlSum;
     }
@@ -69,7 +69,7 @@ class GroupHeader
         return $this->messageIdentification;
     }
 
-    public function setControlSum(int $controlSum) :self
+    public function setControlSum(float $controlSum) :self
     {
         $this->controlSum = $controlSum;
         return $this;
