@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Perry Faro 2015
  * @author René Welbers 2021 <info@wereco.de>
@@ -28,60 +29,45 @@ class Payment
 
     protected string $remittanceInformation;
 
-    public function getAmount() :string
+    public function getAmount(): string
     {
         return $this->amount;
     }
 
-    public function getCreditorName() :string
-    {
-        return $this->creditorName;
-    }
-
-    public function getCreditorIBAN() :string
-    {
-        return $this->creditorIban;
-    }
-
-    public function getCreditorBIC() :string
-    {
-        return $this->creditorBic;
-    }
-
-    public function getCurrency() :string
-    {
-        return $this->currency;
-    }
-
-    public function getEndToEndId() :string
-    {
-        return $this->endToEndId;
-    }
-
-    public function getRemittanceInformation() :string
-    {
-        return $this->remittanceInformation;
-    }
-
-    public function setAmount(string $amount) :self
+    public function setAmount(string $amount): self
     {
         $this->amount = $amount;
         return $this;
     }
 
-    public function setCreditorName(string $name) :self
+    public function getCreditorName(): string
+    {
+        return $this->creditorName;
+    }
+
+    public function setCreditorName(string $name): self
     {
         $this->creditorName = $name;
         return $this;
     }
 
-    public function setCreditorIBAN(string $iban) :self
+    public function getCreditorIBAN(): string
+    {
+        return $this->creditorIban;
+    }
+
+    public function setCreditorIBAN(string $iban): self
     {
         $this->creditorIban = $iban;
         return $this;
     }
 
-    public function setCreditorBIC(string $bic) :self
+    public function getCreditorBIC(): string
+    {
+        return $this->creditorBic;
+    }
+
+    public function setCreditorBIC(string $bic): self
     {
         if ($bic !== null && $bic !== '') {
             $this->creditorBic = $bic;
@@ -89,19 +75,34 @@ class Payment
         return $this;
     }
 
-    public function setCurrency(string $currency) :self
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
         return $this;
     }
 
-    public function setEndToEndId(string $endToEndId) :self
+    public function getEndToEndId(): string
+    {
+        return $this->endToEndId;
+    }
+
+    public function setEndToEndId(string $endToEndId): self
     {
         $this->endToEndId = $endToEndId;
         return $this;
     }
 
-    public function setRemittanceInformation(string $remittanceInformation) :self
+    public function getRemittanceInformation(): string
+    {
+        return $this->remittanceInformation;
+    }
+
+    public function setRemittanceInformation(string $remittanceInformation): self
     {
         $this->remittanceInformation = $remittanceInformation;
         return $this;

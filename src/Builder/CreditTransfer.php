@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Perry Faro 2015
  * @author René Welbers 2021 <info@wereco.de>
@@ -28,14 +29,17 @@ class CreditTransfer extends Base
         $this->root->appendChild($this->transfer);
     }
 
-    public function appendGroupHeader(GroupHeader $groupHeader) :void
+    public function appendGroupHeader(GroupHeader $groupHeader): void
     {
         $groupHeaderElement = $this->createElement('GrpHdr');
 
         $messageIdentification = $this->createElement('MsgId', $groupHeader->getMessageIdentification());
         $groupHeaderElement->appendChild($messageIdentification);
 
-        $creationDateTime = $this->createElement('CreDtTm', $groupHeader->getCreationDateTime()->format('Y-m-d\TH:i:s\Z'));
+        $creationDateTime = $this->createElement(
+            'CreDtTm',
+            $groupHeader->getCreationDateTime()->format('Y-m-d\TH:i:s\Z')
+        );
         $groupHeaderElement->appendChild($creationDateTime);
 
         $numberOfTransactions = $this->createElement('NbOfTxs', $groupHeader->getNumberOfTransactions());
@@ -52,11 +56,14 @@ class CreditTransfer extends Base
         $this->transfer->appendChild($groupHeaderElement);
     }
 
-    public function appendPaymentInformation(PaymentInformation $paymentInformation) :void
+    public function appendPaymentInformation(PaymentInformation $paymentInformation): void
     {
         $this->payment = $this->createElement('PmtInf');
 
-        $paymentInformationIdentification = $this->createElement('PmtInfId', $paymentInformation->getPaymentInformationIdentification());
+        $paymentInformationIdentification = $this->createElement(
+            'PmtInfId',
+            $paymentInformation->getPaymentInformationIdentification()
+        );
         $this->payment->appendChild($paymentInformationIdentification);
 
         $paymentMethod = $this->createElement('PmtMtd', $paymentInformation->getPaymentMethod());
@@ -91,7 +98,7 @@ class CreditTransfer extends Base
         $this->transfer->appendChild($this->payment);
     }
 
-    protected function appendPayments($payments) :void
+    protected function appendPayments($payments): void
     {
         foreach ($payments as $payment) {
             $creditTransferTransactionInformation = $this->createElement('CdtTrfTxInf');
@@ -136,7 +143,7 @@ class CreditTransfer extends Base
         }
     }
 
-    public function xml() :string
+    public function xml(): string
     {
         $xml = $this->dom->saveXML();
         if ($xml === false) {
@@ -144,5 +151,4 @@ class CreditTransfer extends Base
         }
         return $xml;
     }
-
 }

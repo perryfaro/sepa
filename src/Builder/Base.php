@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Perry Faro 2015
  * @author René Welbers 2021 <info@wereco.de>
@@ -17,14 +18,14 @@ use DOMElement;
  */
 class Base
 {
-    private string $painFormat = 'pain.001.001.03';
-
     protected DOMDocument $dom;
 
     /**
      * @var DOMElement|false
      */
     protected $root;
+
+    private string $painFormat = 'pain.001.001.03';
 
     public function __construct(string $painFormat = 'pain.001.001.03')
     {
@@ -42,7 +43,23 @@ class Base
         $this->dom->appendChild($this->root);
     }
 
-    protected function createElement(string $name, string $value = null) :DOMElement
+    public function getPainFormat(): string
+    {
+        return $this->painFormat;
+    }
+
+    protected function financialInstitution(string $bic = ''): DOMElement
+    {
+        if ($bic === '') {
+            $bic = 'NOTPROVIDED';
+        }
+        $finInstitution = $this->createElement('FinInstnId');
+        $finInstitution->appendChild($this->createElement('BIC', $bic));
+
+        return $finInstitution;
+    }
+
+    protected function createElement(string $name, string $value = null): DOMElement
     {
         $elm = $this->dom->createElement($name);
 
@@ -55,33 +72,17 @@ class Base
         return $elm;
     }
 
-    protected function financialInstitution(string $bic = '') :DOMElement
-    {
-        if ($bic === '') {
-            $bic = 'NOTPROVIDED';
-        }
-        $finInstitution = $this->createElement('FinInstnId');
-        $finInstitution->appendChild($this->createElement('BIC', $bic));
-
-        return $finInstitution;
-    }
-
-    protected function IBAN(string $iban) :DOMElement
+    protected function IBAN(string $iban): DOMElement
     {
         $id = $this->createElement('Id');
         $id->appendChild($this->createElement('IBAN', $iban));
         return $id;
     }
 
-    protected function remittence(string $remittenceInformation) :DOMElement
+    protected function remittence(string $remittenceInformation): DOMElement
     {
         $remittanceInformation = $this->createElement('RmtInf');
         $remittanceInformation->appendChild($this->createElement('Ustrd', $remittenceInformation));
         return $remittanceInformation;
-    }
-
-    public function getPainFormat() :string
-    {
-        return $this->painFormat;
     }
 }

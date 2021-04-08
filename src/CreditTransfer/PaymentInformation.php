@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Perry Faro 2015
  * @author René Welbers 2021 <info@wereco.de>
@@ -33,70 +34,45 @@ class PaymentInformation
 
     protected array $payments = [];
 
-    public function getControlSum() :float
+    public function getControlSum(): float
     {
         return $this->controlSum;
     }
 
-    public function getDebtorName() :string
-    {
-        return $this->debtorName;
-    }
-
-    public function getDebtorIBAN() :string
-    {
-        return $this->debtorIban;
-    }
-
-    public function getDebtorBIC() :string
-    {
-        return $this->debtorBic;
-    }
-
-    public function getNumberOfTransactions() :int
-    {
-        return $this->numberOfTransactions;
-    }
-
-    public function getPaymentInformationIdentification() :string
-    {
-        return $this->paymentInformationIdentification;
-    }
-
-    public function getPaymentMethod() :string
-    {
-        return $this->paymentMethod;
-    }
-
-    public function getPayments() :array
-    {
-        return $this->payments;
-    }
-
-    public function getRequestedExecutionDate() :string
-    {
-        return $this->requestedExecutionDate;
-    }
-
-    public function setControlSum(float $controlSum) :self
+    public function setControlSum(float $controlSum): self
     {
         $this->controlSum = $controlSum;
         return $this;
     }
 
-    public function setDebtorName(string $name) :self
+    public function getDebtorName(): string
+    {
+        return $this->debtorName;
+    }
+
+    public function setDebtorName(string $name): self
     {
         $this->debtorName = $name;
         return $this;
     }
 
-    public function setDebtorIBAN(string $iban) :self
+    public function getDebtorIBAN(): string
+    {
+        return $this->debtorIban;
+    }
+
+    public function setDebtorIBAN(string $iban): self
     {
         $this->debtorIban = $iban;
         return $this;
     }
 
-    public function setDebtorBIC(string $bic) :self
+    public function getDebtorBIC(): string
+    {
+        return $this->debtorBic;
+    }
+
+    public function setDebtorBIC(string $bic): self
     {
         if ($bic !== '') {
             $this->debtorBic = $bic;
@@ -104,19 +80,44 @@ class PaymentInformation
         return $this;
     }
 
-    public function setNumberOfTransactions(int $numberOfTransactions) :self
+    public function getNumberOfTransactions(): int
+    {
+        return $this->numberOfTransactions;
+    }
+
+    public function setNumberOfTransactions(int $numberOfTransactions): self
     {
         $this->numberOfTransactions = $numberOfTransactions;
         return $this;
     }
 
-    public function setPaymentInformationIdentification(string $paymentInformationIdentification) :self
+    public function getPaymentInformationIdentification(): string
+    {
+        return $this->paymentInformationIdentification;
+    }
+
+    public function setPaymentInformationIdentification(string $paymentInformationIdentification): self
     {
         $this->paymentInformationIdentification = $paymentInformationIdentification;
         return $this;
     }
 
-    public function setRequestedExecutionDate(string $requestDate) :self
+    public function getPaymentMethod(): string
+    {
+        return $this->paymentMethod;
+    }
+
+    public function getPayments(): array
+    {
+        return $this->payments;
+    }
+
+    public function getRequestedExecutionDate(): string
+    {
+        return $this->requestedExecutionDate;
+    }
+
+    public function setRequestedExecutionDate(string $requestDate): self
     {
         $this->requestedExecutionDate = $requestDate;
         return $this;
@@ -128,7 +129,7 @@ class PaymentInformation
      *
      * @return PaymentInformation
      */
-    public function addPayments($payment) :self
+    public function addPayments($payment): self
     {
         if (is_array($payment)) {
             foreach ($payment as $transfer) {
@@ -140,5 +141,4 @@ class PaymentInformation
 
         return $this;
     }
-
 }

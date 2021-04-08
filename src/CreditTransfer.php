@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Perry Faro 2015
  * @author René Welbers 2021 <info@wereco.de>
@@ -25,19 +26,19 @@ class CreditTransfer
 
     protected ?PaymentInformation $paymentInformation = null;
 
-    public function setGroupHeader(GroupHeader $groupHeader) :self
+    public function setGroupHeader(GroupHeader $groupHeader): self
     {
         $this->groupHeader = $groupHeader;
         return $this;
     }
 
-    public function setPaymentInformation(PaymentInformation $paymentInformation) :self
+    public function setPaymentInformation(PaymentInformation $paymentInformation): self
     {
         $this->paymentInformation = $paymentInformation;
         return $this;
     }
 
-    public function validate(string $xml, string $painformat = 'pain.001.001.03') :bool
+    public function validate(string $xml, string $painformat = 'pain.001.001.03'): bool
     {
         $reader = new DOMDocument();
         $reader->loadXML($xml);
@@ -47,7 +48,7 @@ class CreditTransfer
         return false;
     }
 
-    public function xml(string $painformat = 'pain.001.001.03') :string
+    public function xml(string $painformat = 'pain.001.001.03'): string
     {
         if ($this->groupHeader === null) {
             throw new SepaSctException('GroupHeader cannot be empty.');
@@ -62,5 +63,4 @@ class CreditTransfer
         $build->appendPaymentInformation($this->paymentInformation);
         return $build->xml();
     }
-
 }
