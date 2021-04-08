@@ -48,6 +48,6 @@ jobs:
       run: phpunit --coverage-text
 
     - name: Generate test coverage badge
-      uses: ./
+      uses: timkrase/phpunit-coverage-badge@v1.2.0
       with:
         coverage_badge_path: 'badge.svg'
