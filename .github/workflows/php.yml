@@ -47,7 +47,7 @@ jobs:
     - name: Run Tests
       run: phpunit --coverage-text
 
-    - name: Generate test coverage badge
-      uses: timkrase/phpunit-coverage-badge@v1.2.0
-      with:
-        coverage_badge_path: 'badge.svg'
+    - name: Send code coverage report to Codecov.io
+      env:
+        CODECOV_TOKEN: "${{ secrets.CODECOV_TOKEN }}"
+      run: bash <(curl -s https://codecov.io/bash) || true
