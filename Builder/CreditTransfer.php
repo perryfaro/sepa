@@ -31,7 +31,7 @@ class CreditTransfer extends Base {
         $messageIdentification = $this->createElement('MsgId', $groupHeader->getMessageIdentification());
         $groupHeaderElement->appendChild($messageIdentification);
 
-        $creationDateTime = $this->createElement('CreDtTm', $groupHeader->getCreationDateTime()->format('Y-m-d\TH:i:s\Z'));
+        $creationDateTime = $this->createElement('CreDtTm', $groupHeader->getCreationDateTime()->format('Y-m-d\TH:i:s'));
         $groupHeaderElement->appendChild($creationDateTime);
 
         $numberOfTransactions = $this->createElement('NbOfTxs', $groupHeader->getNumberOfTransactions());
